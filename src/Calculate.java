@@ -27,11 +27,11 @@ public class Calculate {
       String temp = postfix[i];
       if (isOperator(postfix[i])) {
         double resulte = 0;
-        if (temp.equals(Operator.plus.value)
-            || temp.equals(Operator.min.value)
-            || temp.equals(Operator.mul.value)
-            || temp.equals(Operator.div.value)
-            || temp.equals(Operator.pow.value)) {
+        if (temp.equals("+")
+            || temp.equals("-")
+            || temp.equals("X")
+            || temp.equals("/")
+            || temp.equals("^")) {
           double op2 = Double.parseDouble(String.valueOf(stack.pop()));
           double op1 = Double.parseDouble(String.valueOf(stack.pop()));
 
@@ -59,18 +59,18 @@ public class Calculate {
           }
         } else {
           double op1 = Double.parseDouble(stack.pop().toString());
-          resulte=0;
+          resulte = 0;
           switch (temp) {
             case "Sin" -> {
-              resulte = (isDegree)?Math.sin(op1*(Math.PI/180.0)):Math.sin(op1);
+              resulte = (isDegree) ? Math.sin(op1 * (Math.PI / 180.0)) : Math.sin(op1);
               stack.push(resulte);
             }
             case "Cos" -> {
-              resulte = (isDegree)?Math.cos(op1*(Math.PI/180.0)):Math.cos(op1);
+              resulte = (isDegree) ? Math.cos(op1 * (Math.PI / 180.0)) : Math.cos(op1);
               stack.push(resulte);
             }
             case "Tan" -> {
-              resulte =(isDegree)?Math.tan(op1*(Math.PI/180.0)):Math.tan(op1);
+              resulte = (isDegree) ? Math.tan(op1 * (Math.PI / 180.0)) : Math.tan(op1);
               stack.push(resulte);
             }
             case "Ln" -> {
@@ -129,14 +129,16 @@ public class Calculate {
       postfix[j] = "";
 
       temp = String.valueOf(infix.charAt(i));
-
       // is number
       if (Character.isDigit(infix.charAt(i))) {
-        i++;
+        temp="";
         while (Character.isDigit(infix.charAt(i)) || infix.charAt(i) == '.') {
           temp += infix.charAt(i);
           i++;
-          if (i == infix.length()) break;
+
+          if (i == infix.length()) {
+            break;
+          }
         }
         postfix[j] = temp;
         i--;
@@ -158,7 +160,7 @@ public class Calculate {
         }
 
         // is nonsymbol operator
-        if (Character.isLetter(temp.charAt(0))) {
+        if (Character.isLetter(temp.charAt(0)) && temp.charAt(0)!= 'X') {
           i++;
           while (Character.isLetter(infix.charAt(i))) {
             temp += infix.charAt(i);
@@ -170,11 +172,11 @@ public class Calculate {
 
         // is Symbol operator
         if (!temp.equals("(")
-            && (temp.equals(Operator.plus.value)
-                || temp.equals(Operator.min.value)
-                || temp.equals(Operator.div.value)
-                || temp.equals(Operator.mul.value)
-                || temp.equals(Operator.pow.value))) {
+            && (temp.equals("+")
+                || temp.equals("-")
+                || temp.equals("/")
+                || temp.equals("X")
+                || temp.equals("^"))) {
           while (stack.size() > 0
               && !String.valueOf(stack.peek()).equals("(")
               && priority(temp) <= priority(String.valueOf(stack.peek()))) {
@@ -184,13 +186,18 @@ public class Calculate {
           stack.push(temp);
         }
       }
-    System.out.println(Arrays.toString(postfix));
+      System.out.println(Arrays.toString(postfix));
     }
     while (stack.size() > 0) {
-      postfix[j] = String.valueOf(stack.pop());
+      if (stack.peek().equals("(")) 
+      {
+        stack.pop();
+        continue;
+      }
+        postfix[j] = String.valueOf(stack.pop());
       j++;
     }
-    
+    System.out.println(Arrays.toString(postfix));
     return postfix;
   }
 }
