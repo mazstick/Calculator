@@ -186,7 +186,7 @@ public class Calculate {
           stack.push(temp);
         }
       }
-      System.out.println(Arrays.toString(postfix));
+     
     }
     while (stack.size() > 0) {
       if (stack.peek().equals("(")) 
@@ -197,7 +197,7 @@ public class Calculate {
         postfix[j] = String.valueOf(stack.pop());
       j++;
     }
-    System.out.println(Arrays.toString(postfix));
+    
     return postfix;
   }
 }

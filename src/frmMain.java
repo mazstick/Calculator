@@ -315,10 +315,7 @@ public class frmMain extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 13, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnAC, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnDot, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -404,6 +401,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonGroup1.add(rdbDegree);
+        rdbDegree.setSelected(true);
         rdbDegree.setText("Degree");
         rdbDegree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,12 +425,17 @@ public class frmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinActionPerformed
-        lblResult.setText(lblResult.getText() + " " + btnMin.getText()+ " ");
+        lblResult.setText(lblResult.getText() + " " + btnMin.getText() + " ");
     }//GEN-LAST:event_btnMinActionPerformed
 
     private void btnEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEqualActionPerformed
         Calculate calculate = new Calculate();
-        String resulte = calculate.evaluation(lblResult.getText(),true);
+        String resulte = calculate.evaluation(lblResult.getText(), rdbDegree.isSelected());
+        double t1 = Double.parseDouble(resulte);
+        int t2 = (int) t1;
+        if (t1 == t2) {
+            resulte = String.valueOf(t2);
+        }
         lblResult.setText(resulte);
     }//GEN-LAST:event_btnEqualActionPerformed
 
@@ -441,7 +444,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btn0ActionPerformed
 
     private void btnSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumActionPerformed
-        lblResult.setText(lblResult.getText()  + btnSum.getText());
+        lblResult.setText(lblResult.getText() + " " + btnSum.getText() + " ");
     }//GEN-LAST:event_btnSumActionPerformed
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
@@ -453,7 +456,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btn8ActionPerformed
 
     private void btnDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivActionPerformed
-        lblResult.setText(lblResult.getText() + " " + btnDiv.getText()+ " ");
+        lblResult.setText(lblResult.getText() + " " + btnDiv.getText() + " ");
     }//GEN-LAST:event_btnDivActionPerformed
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
@@ -465,7 +468,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btn6ActionPerformed
 
     private void btnMulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMulActionPerformed
-        lblResult.setText(lblResult.getText() + " " + btnMul.getText()+ " ");
+        lblResult.setText(lblResult.getText() + " " + btnMul.getText() + " ");
     }//GEN-LAST:event_btnMulActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
@@ -497,6 +500,16 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClosePrActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        String temp = lblResult.getText();
+        if (temp.endsWith("Sin(") || temp.endsWith("Cos(") || temp.endsWith("Tan(") || temp.endsWith("Log(")) {
+            lblResult.setText(lblResult.getText().substring(0, lblResult.getText().length() - 4));
+        }
+        if (temp.endsWith("Ln(")) {
+            lblResult.setText(lblResult.getText().substring(0, lblResult.getText().length() - 3));
+        }
+        if (temp.endsWith("Sqrt(")) {
+            lblResult.setText(lblResult.getText().substring(0, lblResult.getText().length() - 5));
+        }
         lblResult.setText(lblResult.getText().substring(0, lblResult.getText().length() - 1));
     }//GEN-LAST:event_btnDelActionPerformed
 
@@ -533,7 +546,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLnActionPerformed
 
     private void btnPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPIActionPerformed
-        lblResult.setText(lblResult.getText() + " " + Math.PI+ " ");
+        lblResult.setText(lblResult.getText() + " " + Math.PI + " ");
     }//GEN-LAST:event_btnPIActionPerformed
 
     private void btnPowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPowActionPerformed
