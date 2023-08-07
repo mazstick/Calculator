@@ -1,5 +1,6 @@
 
 import java.awt.Cursor;
+import java.awt.Toolkit;
 
 /**
  *
@@ -12,6 +13,7 @@ public class frmMain extends javax.swing.JFrame {
      */
     public frmMain() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(".\\icon\\images.png")));
     }
 
     /**

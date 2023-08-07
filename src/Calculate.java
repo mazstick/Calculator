@@ -5,19 +5,7 @@ import java.util.Stack;
  * @author Mohammad Ali Zahmatkesh
  */
 public class Calculate {
-  private enum Operator {
-    plus("+"),
-    min("-"),
-    mul("X"),
-    div("/"),
-    pow("^");
-    private final String value;
-
-    private Operator(String value) {
-      this.value = value;
-    }
-    ;
-  }
+ 
 
   public String evaluation(String infix, boolean isDegree) {
 
